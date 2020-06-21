@@ -1,17 +1,19 @@
 // constantes
 const dataInicial = {
-    array: []
+    tasks: []
 }
 
 // types
+const GET_CARD_SUCCESS = 'GET_CARD_SUCCESS'
 const ADD_CARD_SUCCESS = 'ADD_CARD_SUCCESS'
 
 // reducer
-export default function cardReducer(state = dataInicial, action){
-    switch (action.type) {
+export default function cardReducer(state = dataInicial, {type, payload}){
+    switch (type) {
+        case GET_CARD_SUCCESS:
+            return state
         case ADD_CARD_SUCCESS:
-
-            break;
+            return { ...state, tasks:payload}
 
         default:
             return state;
@@ -20,8 +22,15 @@ export default function cardReducer(state = dataInicial, action){
 }
 
 // actions
-export const addCardAction = () => async (dispatch) => {
+export const addCardAction = (List) => async (dispatch, getState) => {
+        dispatch({
+            type: ADD_CARD_SUCCESS,
+            payload: List
+        })
+}
+
+export const getCardAction = () => async (dispatch, state) => {
     dispatch({
-        type: ADD_CARD_SUCCESS,
+        type: ADD_CARD_SUCCESS
     })
 }

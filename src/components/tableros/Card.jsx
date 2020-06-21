@@ -9,7 +9,7 @@ export default function Card({ item }) {
             className="block text-gray-500 text-sm font-bold mb-2"
             htmlFor="username"
           >
-            {item}
+            {item.title}
           </label>
         </div>
       </form>

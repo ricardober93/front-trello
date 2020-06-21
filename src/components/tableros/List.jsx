@@ -1,19 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card";
+import {useDispatch, useSelector} from 'react-redux'
+import {addCardAction, getCardAction} from './../../redux/trelloDucks'
+
 
 export default function List({ tituloLista, }) {
-  const [CardsItems, setCardsItems] = useState([]);
-  const [CardItem, setCard] = useState("");
+ 
+  const cardsArray = useSelector(store => store.cards.tasks)
+  const dispatch = useDispatch();
+  const [Cards, setCard] = useState({
+    title: '',
+    content: '',
+    finished: false
+  });
+  const [List, setList] = useState([]);
   const [Open, setOpen] = useState(false);
+
 
   const createCardHandle = (e) => {
     const title = e.target.value;
-    setCard(title);
+    setCard({...Cards,
+      title: title
+    });
   };
-  const addCards = (e) => {
-    e.preventDefault();
-    setCardsItems([...CardsItems, CardItem]);
-    setOpen(!Open);
+  const addCards = () => {
+   setList([...List, Cards])
+   dispatch(addCardAction(List))
+   setOpen(!Open);
   };
 
   return (
@@ -22,7 +35,11 @@ export default function List({ tituloLista, }) {
         <p className="text-sm text-gray-600 flex items-center">
           {tituloLista}
         </p>
-        {CardsItems ? CardsItems.map((item) => <Card item={item} />) : null}
+        {
+
+          List.map((item, i) => (<Card key={i} item={item} />)) 
+       
+        }
         {Open ? (
           <form
             className="max-w-xs bg-white bg-white mt-3 shadow-sm mx-auto"
