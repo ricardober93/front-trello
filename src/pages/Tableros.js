@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import Header from '../components/Header'
-import Content from '../components/tableros/Content'
+import Board from '../components/tableros/Board'
 
 
 
@@ -8,7 +8,7 @@ function Tableros() {
     return (
         <Fragment>
             <Header titulo="Tareas Universidad" />
-            <Content />
+            <Board />
         </Fragment>
     )
 }

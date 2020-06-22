@@ -8,7 +8,7 @@ export default function Nabvar() {
           Trello Clon
         </span>
       </div>
-      <div className="w-full block flex items-end lg:w-auto">
+      {/* <div className="w-full block flex items-end lg:w-auto">
         <div>
           <a className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0"
           >
@@ -19,7 +19,7 @@ export default function Nabvar() {
             Sign Up
           </a>
         </div>
-      </div>
+      </div> */}
     </nav>
   );
 }

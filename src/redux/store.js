@@ -1,9 +1,9 @@
 import {createStore, combineReducers, compose, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
-import cardReducer from "./trelloDucks";
+import TrelloReducer from "./TrelloDuck";
 
 const rootReducer = combineReducers({
-    cards:cardReducer
+    Lists:TrelloReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

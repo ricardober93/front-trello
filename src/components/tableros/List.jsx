@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, } from "react";
 import Card from "./Card";
-import {useDispatch, useSelector} from 'react-redux'
-import {addCardAction, getCardAction} from './../../redux/trelloDucks'
+import {useDispatch } from 'react-redux'
+import {addCardAction, } from '../../redux/TrelloDuck'
+import shortid from 'shortid'
 
 
-export default function List({ tituloLista, }) {
+export default function List({ title }) {
  
-  const cardsArray = useSelector(store => store.cards.tasks)
   const dispatch = useDispatch();
   const [Cards, setCard] = useState({
     title: '',
-    content: '',
-    finished: false
   });
   const [List, setList] = useState([]);
   const [Open, setOpen] = useState(false);
@@ -19,7 +17,9 @@ export default function List({ tituloLista, }) {
 
   const createCardHandle = (e) => {
     const title = e.target.value;
+    const id = shortid.generate()
     setCard({...Cards,
+      id:id,
       title: title
     });
   };
@@ -29,15 +29,22 @@ export default function List({ tituloLista, }) {
    setOpen(!Open);
   };
 
+
+  const DeleteItem = (id) => {
+    const arrayFiltrado = List.filter(item => item.id !== id)
+    setList(arrayFiltrado)
+  }
+
+
   return (
-    <section className="sm:w-auto  w-min-240 w-max-300 w-25">
+    <section className="sm:w-auto  w-min-240 w-max-300 w-25 overflow">
       <div className="max-w-sm rounded bg-gray-200 overflow-hidden shadow-lg p-4">
-        <p className="text-sm text-gray-600 flex items-center">
-          {tituloLista}
+        <p className="text-sm text-gray-600 flex items-center text-lg font-bold">
+          {title}
         </p>
         {
 
-          List.map((item, i) => (<Card key={i} item={item} />)) 
+          List?   List.map((item, i) => (<Card key={i} item={item} id={item.id} DeleteItem={DeleteItem} />))  : null
        
         }
         {Open ? (
